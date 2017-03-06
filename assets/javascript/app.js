@@ -21,19 +21,17 @@ function headerLoop() {
 headerLoop();
 
 //list of questions and answers
-var questions=[{
-      question: "What material has been identified to be strong enough to support a Space Elevator?",
-      choices:  ["Diamond NanoThreads", "Carbon Nanotubes", "Atomic substructures"],
-      correctAnswer: 1
-},  {
-      question: "What novelist first introduced the concept of a Space Elevator?", 
-      choices: ["Arthur C. Clark", "Kim Stanley Robinson", "Neil Degrass Tyson"],
-      correctAnswer: 0
-},  {
-      question: "What Earth Orbit is required for a Space Elevator?",
-      choices: ["Low Earth Orbit", "Geosynchronous Orbit", "Geostationary Orbit"],
-      correctAnswer: 2
-}];
+var questions=["What material has been identified to be strong enough to support a Space Elevator?",
+                "What novelist first introduced the concept of a Space Elevator?",
+                "What Earth Orbit is required for a Space Elevator?"];
+
+var choices=[["Diamond NanoThreads","Carbon Nanotubes","Atomic substructures"],
+             ["Arthur C. Clark", "Kim Stanley Robinson", "Neil Degrass Tyson"],
+             ["Low Earth Orbit", "Geosynchronous Orbit", "Geostationary Orbit"]];
+
+
+var answers=[1,0,2];                              
+ 
 
 var currentQuestion = 0;
 
@@ -55,7 +53,7 @@ function startGame(){
       timer();
       displayQuestion();
    
-  
+  console.log(choices);
   })
 }
 
@@ -71,16 +69,16 @@ function decrement(){
   $('#startbtn').html(time);
     time --;
 
-      if(time === -2){ 
+      if(time === -1){ 
 
        clearInterval(interval); 
    
-         $('#startbtn').html("Time has run out.");
+         $('#startbtn').html();
 
           console.log(time);
           timer();
           displayQuestion();
-          index++;
+          
   }
 
 }
@@ -91,32 +89,26 @@ function displayQuestion() {
 
     for(var i=0; i<questions.length;i++){
 
-      $("#questions").html(questions[index].question); 
-      console.log(questions);
+      $("#questions").html(questions[index]); 
+      console.log(questions[index]);
       
-      $(".choiceList").html(questions[index].choices);
-
-      (questions[index].correctAnswer[i]);
-      //tried to create radio buttons but I believe I screwed up my logic in regards to the for loop
-        var input= $(".choiceList").html(questions.choices);
-
-          $(input).attr({
-            "type":"radio",
-            "name":"choice1",
-            "value":"questions.choices[0]"
-        })
-            
-
-
-          
-
-
     }
+index++;
 
+}
+function displayChoices() {   
+
+    for(var i=0; i<choices.length;i++){
+
+      $("#choiceList").html(choices[index]); 
+      console.log(choices[index]);
+      
+    }
+index++;
 
 }
 
-console.log(index);
+
 
 startGame();
 
