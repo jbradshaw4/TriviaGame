@@ -56,7 +56,7 @@ var question;
 var questionClass;
 var choiceList;
 var numChoices;
-var choice;
+
 
 
  
@@ -74,11 +74,17 @@ function displayQuestion(){
 
   $('.question').html(question);
 
-  numChoices = questions[currentQuestion].choices.length;
-  console.log("current choices: " + questions[currentQuestion].choices);
-   $('choiceList').appendTo(choiceList);
+  //numChoices = questions[currentQuestion].choices.length;
 
+  var pickAnswer= questions[currentQuestion].choices;
+  console.log("current choices: " + pickAnswer);
+  $('.choiceList').append(pickAnswer);
 
+  for (i = 0; i < pickAnswer.length; i++) {
+    var choice = pickAnswer[i];
+    $('<button type="button" class="list-group">' + choice + '</button>').append(choice);
+    console.log(choice);
+        };
   
 
 };
