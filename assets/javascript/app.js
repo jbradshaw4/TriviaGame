@@ -58,36 +58,68 @@ var choiceList;
 var numChoices;
 
 
-
  
+$('.quizContainer').hide();
+
+$(".quizContainer").fadeIn(9000);
+
 $("#start").click(function() {
+
     $("#start").hide();
-    displayQuestion();
-    
-    
+    $(".question").html("<img src='assets/images/elevator.gif' width= 500px height= 400px/>");
+    setTimeout (function(){
+     reset();
+    },4000);
+   // displayQuestion();
 });
+    
+    
+    
 
-function displayQuestion(){
+function displayQuestion() {
+        $(".quizContainer").fadeIn(5000);
+        $("#start").hide();
+        //starts 30s timer
+        //timer();
+        question = questions[currentQuestion].question;
+        console.log("current question: " + question);
+        //is .find necessary?
+        questionClass = $(".quizContainer").find(".question");
+        choiceList = $(".quizContainer").find(".choiceList");
+        numChoices = questions[currentQuestion].choices.length;
+        console.log("current answer index: " + questions[currentQuestion].correct);
 
-  question = questions[currentQuestion].question;
-  console.log(question);
+        // Set the questionClass to the current question
+        $(questionClass).html(question);
 
-  $('.question').html(question);
+        // Remove all current <li> elements (if any)
+        $(choiceList).find(".choiceList").remove();
 
-  //numChoices = questions[currentQuestion].choices.length;
-
-  var pickAnswer= questions[currentQuestion].choices;
-  console.log("current choices: " + pickAnswer);
-  $('.choiceList').append(pickAnswer);
-
-  for (i = 0; i < pickAnswer.length; i++) {
-    var choice = pickAnswer[i];
-    $('<button type="button" class="list-group">' + choice + '</button>').append(choice);
-    console.log(choice);
+        var choice;
+        for (i = 0; i < numChoices; i++) {
+            choice = questions[currentQuestion].choices[i];
+            $("<button type='button' class='choiceList'>" + choice + "</button>").appendTo(choiceList);
         };
-  
 
-};
+};  
+  
+  function reset() {
+        //shuffles questions
+      //  questions.sort(function() { return 0.5 - Math.random() });
+        currentQuestion = 0;
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+        outOfTimeQuestions = 0;
+        number = 15;
+        $(".choiceList").show();
+        $(".timeLeft").show();
+        $(".result").hide();
+        $(".playAgain").hide();
+        displayQuestion();
+    }
+
+
+
 
 
 
